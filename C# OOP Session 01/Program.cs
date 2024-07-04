@@ -26,8 +26,16 @@
         Execute = 8
     }
 
+    //05
+    public enum Colors
+    {
+        Red,
+        Green,
+        Blue
+    }
+
     //Struct
-    //02
+    //02 &06
     struct Person
     {
         public string Name;
@@ -38,6 +46,27 @@
         {
             Name = name;
             Age = age;
+        }
+    }
+
+    //06
+    struct Point
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+
+        // Constructor
+        public Point(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public static double Distance(Point p1, Point p2)
+        {
+            double dx = p2.X - p1.X;
+            double dy = p2.Y - p1.Y;
+            return Math.Sqrt(dx * dx + dy * dy);
         }
     }
 
@@ -131,6 +160,47 @@
 
             #endregion
 
+            Console.WriteLine("-----------------05---------------");
+
+            #region 05 Create an enum called "Colors" with the basic colors(Red, Green, Blue) as its members.Write a C# program that takes a color name as input from the user and displays a message indicating whether the input color is a primary color or not.
+            Console.WriteLine("Enter a color name:");
+            string inputColor = Console.ReadLine();
+
+            bool isPrimaryColor = Enum.TryParse(inputColor, true, out Colors color);
+
+            if (isPrimaryColor)
+            {
+                Console.WriteLine($"{inputColor} is a primary color.");
+            }
+            else
+            {
+                Console.WriteLine($"{inputColor} is not a primary color.");
+            }
+
+            #endregion
+
+            Console.WriteLine("-----------------06---------------");
+
+            #region 06 Create a struct called "Point" to represent a 2D point with properties "X" and "Y". Write a C# program that takes two points as input from the user and calculates the distance between them.
+            //Frist Point
+            Console.WriteLine("Enter the coordinates for the first point:");
+            Console.Write("X: ");
+            double x1 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Y: ");
+            double y1 = Convert.ToDouble(Console.ReadLine());
+
+            //Second point
+            Console.WriteLine("Enter the coordinates for the second point:");
+            Console.Write("X: ");
+            double x2 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Y: ");
+            double y2 = Convert.ToDouble(Console.ReadLine());
+
+            Point point1 = new Point(x1, y1);
+            Point point2 = new Point(x2, y2);
+            double distance = Point.Distance(point1, point2);
+            Console.WriteLine($"The distance between the points is: {distance}");
+            #endregion
 
         }
     }
