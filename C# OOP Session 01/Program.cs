@@ -202,6 +202,83 @@
             Console.WriteLine($"The distance between the points is: {distance}");
             #endregion
 
+            #region 07 Create a struct called "Person" with properties "Name" and "Age". Write a C# program that takes details of 3 persons as input from the user and displays the name and age of the oldest person.
+            Person[] people1 = new Person[3];
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine($"Enter details for person {i + 1}:");
+
+                string name = GetName();
+                int age = GetAge();
+
+                people1[i] = new Person(name, age);
+            }
+            Person oldestPerson = FindOldestPerson(people1);
+
+            Console.WriteLine($"The oldest person is {oldestPerson.Name} with an age of {oldestPerson.Age}.");
+            #endregion
+
         }
+        #region 07
+
+        //Get Name
+        static string GetName()
+        {
+            while (true)
+            {
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(name))
+                {
+                    return name;
+                }
+                else
+                {
+                    Console.WriteLine("Name cannot be empty. Please enter a valid name.");
+                }
+            }
+        }
+
+        //Get Age
+        static int GetAge()
+        {
+            while (true)
+            {
+                Console.Write("Age: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int age))
+                {
+                    return age;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid age.");
+                }
+            }
+        }
+
+        //Clalc oldest person
+        static Person FindOldestPerson(Person[] people)
+        {
+            if (people.Length == 0)
+            {
+                throw new ArgumentException("The array of people cannot be empty.");
+            }
+
+            Person oldest = people[0];
+
+            for (int i = 1; i < people.Length; i++)
+            {
+                if (people[i].Age > oldest.Age)
+                {
+                    oldest = people[i];
+                }
+            }
+
+            return oldest;
+        }
+        #endregion
     }
 }
