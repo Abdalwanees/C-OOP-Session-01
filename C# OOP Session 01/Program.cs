@@ -14,6 +14,18 @@
         Autumn,
         Winter
     }
+
+    //04
+    [Flags]
+    public enum Permissions
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        Delete = 4,
+        Execute = 8
+    }
+
     //Struct
     //02
     struct Person
@@ -92,6 +104,34 @@
                 Console.WriteLine("Invalid season name entered.");
             }
             #endregion
+        
+            Console.WriteLine("-----------------04---------------");
+
+            #region 04 Assign the following Permissions (Read, write, Delete, Execute) in a form of Enum.
+
+            //Create Variable from previous Enum to Add and Remove Permission from variable, check if specific Permission is existed inside variable
+
+            // Create a variable with some permissions
+            Permissions userPermissions = Permissions.Read | Permissions.Write;
+
+            // Add a permission
+            userPermissions |= Permissions.Execute;
+            Console.WriteLine("Permissions after adding Execute: " + userPermissions);
+
+            // Remove a permission
+            userPermissions &= ~Permissions.Write;
+            Console.WriteLine("Permissions after removing Write: " + userPermissions);
+
+            // Check if a specific permission is present
+            bool hasReadPermission = (userPermissions & Permissions.Read) == Permissions.Read;
+            Console.WriteLine("Has Read permission: " + hasReadPermission);
+
+            bool hasDeletePermission = (userPermissions & Permissions.Delete) == Permissions.Delete;
+            Console.WriteLine("Has Delete permission: " + hasDeletePermission);
+
+            #endregion
+
+
         }
     }
 }
